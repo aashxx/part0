@@ -1,0 +1,48 @@
+exercise 0.4 - sequence diagram
+
+participant server
+participant browser
+
+note over browser:
+user creates a new note by
+writing in the text field
+and clicking on the submit button
+end note
+
+browser->>server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+
+note over browser:
+The browser reloads the Notes page
+and then sends GET requests for the Notes page
+end note
+
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+activate server
+server-->browser: HTML document
+deactivate server
+
+browser->>server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+activate server
+server-->>browser: CSS file
+deactivate server
+
+browser->>server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+activate server
+server-->>browser: JS file
+deactivate server
+
+note over browser:
+browser starts executing js file
+that requests JSON data from the server 
+end note
+
+browser->>server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+activate server
+server-->>browser: [{ content: "fullstack", date: "2023-06-08" }, ...]
+deactivate server
+
+note over browser:
+browser executes the event handler
+that renders notes to display
+end note 

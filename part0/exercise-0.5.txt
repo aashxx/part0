@@ -1,0 +1,26 @@
+exercise 0.5 - sequence diagram
+
+browser->server:HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa
+activate server
+server->browser: HTML file
+deactivate server
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+activate server
+server-->browser: CSS file
+deactivate server
+
+browser->server:HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+activate server
+server->browser: JS file
+deactivate server
+
+note over browser:
+browser starts executing js file
+that requests JSON data from the server 
+end note
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+activate server
+server-->browser: [{ content: "fullstack", date: "2023-06-08" }, ...]
+deactivate server
